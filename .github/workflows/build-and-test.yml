@@ -25,6 +25,9 @@ jobs:
       - name: Install Maven wrapper
         run: mvn -N io.takari:maven:wrapper
 
+      - name: Change directory to project root
+        run: cd spring-boot-webapp
+
       - name: Build with Maven
         run: ./mvnw clean install
 
