@@ -35,7 +35,11 @@ jobs:
         run: ./mvnw jacoco:report
 
       - name: Print code coverage report
-        run: cat target/site/jacoco/index.html
+        run: |
+          coverage=$(grep -A 1 '<counter type="INSTRUCTION"' target/site/jacoco/jacoco.xml | tail -n 1 | awk -F'"' '{print $2}')
+          total=$(grep -A 1 '<counter type="INSTRUCTION"' target/site/jacoco/jacoco.xml | tail -n 1 | awk -F'"' '{print $4}')
+          percent=$(echo "scale=2; $coverage/$total*100" | bc)
+          echo "Code coverage: $percent%"
 
       - name: Build Docker image
         run: docker build -t spring-boot-webapp .
