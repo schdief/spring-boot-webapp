@@ -34,5 +34,8 @@ jobs:
       - name: Measure code coverage
         run: ./mvnw jacoco:report
 
+      - name: Print code coverage report
+        run: cat target/site/jacoco/index.html
+
       - name: Build Docker image
         run: docker build -t spring-boot-webapp .
