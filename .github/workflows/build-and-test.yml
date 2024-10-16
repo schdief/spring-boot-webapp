@@ -31,5 +31,8 @@ jobs:
       - name: Run unit tests
         run: ./mvnw test
 
+      - name: Measure code coverage
+        run: ./mvnw jacoco:report
+
       - name: Build Docker image
         run: docker build -t spring-boot-webapp .
